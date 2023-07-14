@@ -26,7 +26,6 @@ function App() {
           toggle(ticketAppDialogRef.current)
         }}>Ticket app</button>
       </div>
-      Hello world!
       <dialog ref={ticketAppDialogRef} open>
       <div id='ticket-app'>
         <HashRouter>
