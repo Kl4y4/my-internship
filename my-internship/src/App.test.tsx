@@ -4,6 +4,6 @@ import App from './App';
 
 test('renders app component', () => {
   render(<App />);
-  const appComponent = screen.getByText('Hello world!');
+  const appComponent = screen.getByTestId("app")
   expect(appComponent).toBeInTheDocument();
 });

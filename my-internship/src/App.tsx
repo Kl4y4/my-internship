@@ -20,7 +20,7 @@ function App() {
   const ticketAppDialogRef = useRef<HTMLDialogElement>(null)
 
   return <>
-    <div className="App">
+    <div className="App" data-testid="app">
       <div className="tiles">
         <button onClick={(/** @type {PointerEvent}*/ ev) => {
           toggle(ticketAppDialogRef.current)

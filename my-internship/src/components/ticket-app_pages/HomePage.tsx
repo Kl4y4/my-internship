@@ -2,7 +2,7 @@
 const HomePage = () => {
 
   return <>
-    <div id="main" style={{ textAlign: 'center' }}>
+    <div id="main" style={{ textAlign: 'center' }} data-testid="main">
       <h2>Main</h2>
       <p>Jesteśmy firmą organizującą wydarzenia i witamy Cię na naszej stronie.</p>
       <section style={{ columns: '3' }}>
