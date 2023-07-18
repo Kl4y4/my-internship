@@ -32,7 +32,7 @@ function App() {
           setIsAdminPanelOpen(true)
         }}>Admin panel</button>
       </div>
-      <dialog id='admin-panel-dialog'>
+      <dialog id='admin-panel-dialog' data-testid='admin-panel-dialog'>
         <div id='admin-panel-container'>
           <AdminPanel isOpen={isAdminPanelOpen}>
             <form onSubmit={() => setIsAdminPanelOpen(false)} className='close-dialog' method="dialog"><button type="submit">x</button></form>
