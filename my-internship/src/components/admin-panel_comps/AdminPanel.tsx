@@ -88,7 +88,7 @@ const AdminPanel = ({ children, isOpen }: AdminPanelProps) => {
   })
 
   return <>
-    <div>
+    <div style={{ zIndex: 1001, position: 'absolute' }}>
       {children}
     </div>
     <ProConfigProvider hashed={false}>
