@@ -5,6 +5,7 @@ import { ReactNode, useEffect, useState } from 'react'
 import ContactsTable from './ContactsTable'
 import { User } from '../../types/common'
 import UserActivityList from './UserActivityList'
+import apiClient from '../../apiClient'
 
 type AdminPanelProps = {
   children: ReactNode,
@@ -71,9 +72,11 @@ const createCollapseGroups = (user: User) => {
 
 const AdminPanel = ({ children, isOpen }: AdminPanelProps) => {
 
+  const APIClient = apiClient
+
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
-  const [currentUser, setCurrentUser] = useState<User | null>(exampleUsers[0])
-  const [users, setUsers] = useState<Array<User> | null>(exampleUsers)
+  const [currentUser, setCurrentUser] = useState<User | null>(null)
+  const [users, setUsers] = useState<Array<User> | null>(null)
   const [pathname, setPathname] = useState<string>('/')
 
   useEffect(() => {
@@ -81,11 +84,11 @@ const AdminPanel = ({ children, isOpen }: AdminPanelProps) => {
   }, [isOpen])
 
   useEffect(() => {
-    fetch('/api/users')
-    .catch(err => setUsers(exampleUsers))
-
-    fetch('/api/users/getCurrentUser')
-    .catch(err => setCurrentUser(exampleUsers[0]))
+    APIClient.getUsers()
+    .then((data: any) => setUsers(data.users))
+    
+    APIClient.getCurrentUser()
+    .then((response: any) => setCurrentUser(response.user))
   })
 
   return <>
