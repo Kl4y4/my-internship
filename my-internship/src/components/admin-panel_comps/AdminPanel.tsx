@@ -11,37 +11,6 @@ type AdminPanelProps = {
   isOpen: boolean
 }
 
-const exampleUsers: Array<User> = [
-  { 
-    email: "default.user@mail.com", 
-    activity: 
-      [
-        { type: 'sitevisited', name: '/main', date: '2023-06-27T18:40:58.722Z' },
-        { type: 'sitevisited', name: '/events', date: '2023-06-27T18:40:58.722Z' },
-        { type: 'sitevisited', name: '/cart', date: '2023-06-27T18:40:58.722Z' },
-        { type: 'sitevisited', name: '/main', date: new Date().toISOString() },
-        { type: 'sitevisited', name: '/events', date: new Date().toISOString() },
-        { type: 'productadded', name: 'WarsawJS', date: new Date().toISOString() },
-        { type: 'productadded', name: 'Kult', date: new Date().toISOString() },
-      ]
-  }, 
-  { 
-    email: "tescior@testnik.com", 
-    activity: 
-      [
-        { type: 'sitevisited', name: '/main', date: new Date().toISOString() },
-        { type: 'sitevisited', name: '/categories', date: new Date().toISOString() },
-      ] 
-  },
-  { 
-    email: "tronk@ponk.pl", 
-    activity: 
-      [
-        { type: 'sitevisited', name: '/main', date: new Date().toISOString() },
-        { type: 'sitevisited', name: '/categories', date: new Date().toISOString() },
-      ] 
-  }
-]
 
 const menuItemRenderFun = (setPathname: Function) => {
   return (item: any, dom: any) => (
