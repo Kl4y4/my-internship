@@ -2,6 +2,7 @@ import { Button, Table } from 'antd'
 import { useOutletContext } from 'react-router'
 import { Product } from '../../types/common'
 import { useRef } from 'react'
+import apiClient from '../../apiClient'
 
 function toggle(dialog: HTMLDialogElement | null) {
   if (dialog) {
@@ -34,6 +35,8 @@ const columns = [
 ]
 
 const Cart = () => {
+
+  const APIClient = apiClient
   
   const dialogRef = useRef<HTMLDialogElement>(null)
   const paymentInputRef = useRef<HTMLInputElement>(null)
@@ -42,7 +45,7 @@ const Cart = () => {
 
   const onDeleteProductClick = (product: Product) => {
     cartContext.deleteProduct(product)
-    fetch('/api/users/addActivity')
+    APIClient.addUserActivity(cartContext.currentUser.email, product.productName, 'productdeleted')
     .catch((err: any) => console.log('No user is logged in'))
   }
 
@@ -60,7 +63,7 @@ const Cart = () => {
 
   const cancelPayment = () => {
     cartContext.setCart([])
-    fetch('/api/users/addActivity')
+    APIClient.addUserActivity(cartContext.currentUser.email, '', 'cartcleared')
     .catch((err: any) => console.log('No user is logged in'))
   }
 
@@ -70,7 +73,7 @@ const Cart = () => {
         e.preventDefault()
         return
       }
-      fetch('/api/users/addActivity')
+      APIClient.addUserActivity(cartContext.currentUser.email, '', 'productsbought')
       .catch((err: any) => console.log('No user is logged in'))
     }
   }
