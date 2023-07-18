@@ -1,7 +1,10 @@
 import { Button } from 'antd'
 import { useOutletContext } from 'react-router'
+import apiClient from '../../apiClient'
 
 const Events = () => {
+
+  const APIClient = apiClient
 
   const cartContext: any = useOutletContext()
 
@@ -12,7 +15,7 @@ const Events = () => {
       productName: eventName,
       price: price
     }])
-    fetch('/api/users/addActivity')
+    APIClient.addUserActivity(cartContext.currentUser.email, eventName, 'productadded')
     .catch((err: any) => console.log('No user logged in'))
   }
 
