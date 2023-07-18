@@ -3,6 +3,7 @@ import Navbar from './Navbar'
 import { Outlet, useLocation } from 'react-router-dom'
 import { Product, User } from '../../types/common'
 import { Button, Input } from 'antd'
+import apiClient from '../../apiClient'
 
 type TicketAppProps = {
   children: ReactNode
@@ -10,6 +11,7 @@ type TicketAppProps = {
 
 const TicketApp = ({ children }: TicketAppProps) => {
 
+  const APIClient = apiClient
   const location = useLocation()
 
   const [email, setEmail] = useState<string | null>('')
@@ -36,21 +38,21 @@ const TicketApp = ({ children }: TicketAppProps) => {
     if (currentUser?.email === email) {
       alert("Inputted email is currently logged in")
     } else {
-      fetch('/api/users')
+      APIClient.getUsers()
       .then((data: any) => {
         if (data.users) return data.users.filter((el: User) => el.email === email)
       })
       .then((userToLogin: any) => {
         if (userToLogin.length === 0) {
   
-          fetch('/api/users/addUser')
+          APIClient.addUser(email || '')
           .then((data: any) => {
-            data.user && fetch('/api/users/setUser')
+            data.user && APIClient.setCurrentUser(data.user)
           })
     
         } else {
   
-          fetch('/api/users/setUser')
+          APIClient.setCurrentUser(userToLogin[0])
           setCurrentUser(userToLogin[0])
         
         }
@@ -65,11 +67,11 @@ const TicketApp = ({ children }: TicketAppProps) => {
   }
 
   useEffect(() => {
-    fetch('/api/users/getCurrentUser')
+    APIClient.getCurrentUser()
     .then((data: any) => {
       if (data.user) {
         setCurrentUser(data.user)
-        fetch('/api/users/addActivity')
+        APIClient.addUserActivity(data.user.email, location.pathname === '/' ? '/main' : location.pathname, 'sitevisited')
       }
     })
 
@@ -83,7 +85,7 @@ const TicketApp = ({ children }: TicketAppProps) => {
       <div style={{ display: 'flex', gap: '20px' }}>
         <Button type="primary" onClick={onLoginButtonClick}>Zaloguj</Button>
         <Button onClick={() => {
-          fetch('/api/users/setUser')
+          APIClient.setCurrentUser(null)
           setCart([])
         }}>Wyloguj</Button>
       </div> 
