@@ -11,6 +11,38 @@ type AdminPanelProps = {
   isOpen: boolean
 }
 
+const exampleUsers: Array<User> = [
+  { 
+    email: "default.user@mail.com", 
+    activity: 
+      [
+        { type: 'sitevisited', name: '/main', date: '2023-06-27T18:40:58.722Z' },
+        { type: 'sitevisited', name: '/events', date: '2023-06-27T18:40:58.722Z' },
+        { type: 'sitevisited', name: '/cart', date: '2023-06-27T18:40:58.722Z' },
+        { type: 'sitevisited', name: '/main', date: new Date().toISOString() },
+        { type: 'sitevisited', name: '/events', date: new Date().toISOString() },
+        { type: 'productadded', name: 'WarsawJS', date: new Date().toISOString() },
+        { type: 'productadded', name: 'Kult', date: new Date().toISOString() },
+      ]
+  }, 
+  { 
+    email: "tescior@testnik.com", 
+    activity: 
+      [
+        { type: 'sitevisited', name: '/main', date: new Date().toISOString() },
+        { type: 'sitevisited', name: '/categories', date: new Date().toISOString() },
+      ] 
+  },
+  { 
+    email: "tronk@ponk.pl", 
+    activity: 
+      [
+        { type: 'sitevisited', name: '/main', date: new Date().toISOString() },
+        { type: 'sitevisited', name: '/categories', date: new Date().toISOString() },
+      ] 
+  }
+]
+
 const menuItemRenderFun = (setPathname: Function) => {
   return (item: any, dom: any) => (
     <div
@@ -71,8 +103,8 @@ const createCollapseGroups = (user: User) => {
 const AdminPanel = ({ children, isOpen }: AdminPanelProps) => {
 
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
-  const [currentUser, setCurrentUser] = useState<User | null>(null)
-  const [users, setUsers] = useState<Array<User> | null>(null)
+  const [currentUser, setCurrentUser] = useState<User | null>(exampleUsers[0])
+  const [users, setUsers] = useState<Array<User> | null>(exampleUsers)
   const [pathname, setPathname] = useState<string>('/')
 
   useEffect(() => {
@@ -81,10 +113,10 @@ const AdminPanel = ({ children, isOpen }: AdminPanelProps) => {
 
   useEffect(() => {
     fetch('/api/users')
-    .catch(err => setUsers([]))
+    .catch(err => setUsers(exampleUsers))
 
     fetch('/api/users/getCurrentUser')
-    .catch(err => setCurrentUser(null))
+    .catch(err => setCurrentUser(exampleUsers[0]))
   })
 
   return <>
