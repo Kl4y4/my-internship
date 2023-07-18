@@ -14,3 +14,9 @@ export type Product = {
   productName: string,
   price: number
 }
+
+type ApiClient = {
+  users: Array<User>,
+  currentUser?: User,
+  [key : string]: any
+}
