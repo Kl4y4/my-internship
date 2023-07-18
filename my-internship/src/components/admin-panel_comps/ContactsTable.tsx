@@ -1,6 +1,6 @@
-import { Button } from 'antd'
+import { Button, Table } from 'antd'
 import { User } from '../../types/common'
-import Table, { ColumnsType } from 'antd/es/table'
+import { ColumnsType } from 'antd/es/table'
 import { AnyObject } from 'antd/es/_util/type'
 
 type ContactsTableProps = {
