@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/my-internship/static/css/main.7ba067c8.css",
-    "main.js": "/my-internship/static/js/main.99e5c08a.js",
+    "main.js": "/my-internship/static/js/main.8b7d97cc.js",
     "index.html": "/my-internship/index.html",
     "main.7ba067c8.css.map": "/my-internship/static/css/main.7ba067c8.css.map",
-    "main.99e5c08a.js.map": "/my-internship/static/js/main.99e5c08a.js.map"
+    "main.8b7d97cc.js.map": "/my-internship/static/js/main.8b7d97cc.js.map"
   },
   "entrypoints": [
     "static/css/main.7ba067c8.css",
-    "static/js/main.99e5c08a.js"
+    "static/js/main.8b7d97cc.js"
   ]
 }
